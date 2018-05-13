@@ -8,6 +8,7 @@ from flask import request, url_for, jsonify
 from flask_api import FlaskAPI, status, exceptions
 #from collections import OrderedDict
 from collections import OrderedDict
+import config
 
 app = FlaskAPI(__name__)
 app.config["JSON_SORT_KEYS"] = False
@@ -46,7 +47,7 @@ def mock_standings(division):
    #https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1
       # ==> Korpen_SERIE_AVD8015&k=LS8015&p=1
       # ./api/profixio/Korpen_SERIE_AVD8015&k=LS8015&p=1
-      # 
+      #
 
 
 @app.route(base_app_route, methods=['GET'])
@@ -133,9 +134,9 @@ def get_standings(html_table):
     return standings_table
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', config.CONFIG['port']))
 
     if port == 5000:
         app.debug = True
 
-    app.run(host='0.0.0.0', port=port)
+    app.run(host=config.CONFIG['host'], port=port)
