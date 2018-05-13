@@ -7,22 +7,38 @@ from bs4 import BeautifulSoup
 from flask import request, url_for, jsonify
 from flask_api import FlaskAPI, status, exceptions
 #from collections import OrderedDict
-import collections
+from collections import OrderedDict
 
 app = FlaskAPI(__name__)
 app.config["JSON_SORT_KEYS"] = False
 app.config["JSON_AS_ASCII"] = True
 
+#base_app_route = '/api/profixio/divisions'
+base_app_route = '/api/profixio'
+
+# Index-service
 @app.route('/')
 def index():
-    return {"goto" : "/api/profixio/<division>"}
+    return {"api" : base_app_route + "/<division>", "mock" : "/mockapi/profixio/[girlz|boyz]" }
 
-#Mock-service for test usage
+#Mock-service for endpoint-User
 @app.route('/mockapi/profixio/<division>', methods=['GET'])
 def mock_standings(division):
-    with open('examples/girlz-standing-2017-WP-formated.json', 'r') as file:
+    print "Mock division: " + str(division)
+    if division == 'girlz':
+        mock_file = 'examples/girlz_Stockholm-Korpen_2017_standings.json'
+    elif division == 'boyz':
+        mock_file  = 'examples/boyz_Stockholm-Korpen_2017_standings.json'
+    else:
+        mock_file =  'examples/valid_mocks.json'
+
+    with open(mock_file, 'r') as file:
         json_data = file.read()
-        response = json.loads(json_data)
+
+    print json_data
+    response = json.loads(json_data, object_pairs_hook=OrderedDict)
+    print response
+    #response = OrderedDict()
 
     return jsonify(response)
 
@@ -30,39 +46,61 @@ def mock_standings(division):
    #https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1
       # ==> Korpen_SERIE_AVD8015&k=LS8015&p=1
       # ./api/profixio/Korpen_SERIE_AVD8015&k=LS8015&p=1
-@app.route('/api/profixio/<division>', methods=['GET'])
+
+
+@app.route(base_app_route, methods=['GET'])
+def get_divisions():
+    return {"implemented" : "not"}
+
+
+@app.route(base_app_route + '/<division>', methods=['GET'])
+def get_division(division):
+    division_page = get_profixio_page(division)
+    for element in division_page:
+        division_header = element.find('h3').get_text().encode('utf-8')
+    return jsonify({'name' : division_header})
+
+
+@app.route(base_app_route + '/<division>/standings', methods=['GET'])
 def get_standings(division):
     #print request.get_json()
-    response = get_table(division)
-    print response
-    return jsonify(response)
+    division_page = get_profixio_page(division)
+    division_table_html = get_division_table_html(division_page)
+    division_table_json = html_to_json_table(division_table_html)
+    return jsonify(division_table_json)
 
-def get_table(division):
+@app.route(base_app_route + '/<division>/fixtures', methods=['GET'])
+def get_omgangar(division):
+    return {"implemented" : "not"}
+
+
+
+def get_profixio_page(division):
     req = urllib2.Request('https://www.profixio.com/fx/serieoppsett.php?t=' + division, headers={ 'User-Agent': 'Mozilla/5.0' })
+    division_soup = BeautifulSoup(urllib2.urlopen(req).read(), "html.parser")
+    return  division_soup
 
-    #req = urllib2.Request('https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1', headers={ 'User-Agent': 'Mozilla/5.0' })
-    soup = BeautifulSoup(urllib2.urlopen(req).read(), "html.parser")
 
-    main_div = soup.find_all("div", class_="col-sm-9 col-lg-10")
-    #print type(maindiv)
-    #print "\n\nmaindiv\n" + str(maindiv)
+def get_division_table_html(division_page):
+    main_div = division_page.find_all("div", class_="col-sm-9 col-lg-10")
+    return main_div
 
-    for element in main_div:
-        division = element.find('h3').get_text().encode('utf-8')
-        tabell_std_json = table_to_json(element.find('table', id='tabell_std'))
 
-    return tabell_std_json
+def html_to_json_table(html_table):
+    for element in html_table:
+        json_table = get_standings(element.find('table', id='tabell_std'))
 
-def table_to_json(html_table):
+    return json_table
+
+def get_standings(html_table):
     #print "\n\nhtml_table\n"
-    #print type(html_table)
+
+    #Order på önskad output. rank saknas, adderas senare.
     order = ["team", "rank", "gamesPlayed", "wins", "draws", "losses", "goals", "points"]
-    table_header_values = "Lag", 0, "Spelade", "Vinster", "Oavgjorda", "Förluster", "Mål", "Poäng"
+    table_header_values = "Lag", 0, "S", "V", "O", "F", "Mål", "P"
     print table_header_values
-    standings_table_header = collections.OrderedDict(zip(order, table_header_values))
+    standings_table_header = OrderedDict(zip(order, table_header_values))
     standings_table = [standings_table_header]
-
-
 
     order.remove("rank")
     table_data = [[cell.text for cell in row("td")]
@@ -71,7 +109,7 @@ def table_to_json(html_table):
     for lag in table_data:
         print "lag = " + str(lag)
         has_expired = True
-        lag_thingy = collections.OrderedDict()
+        lag_thingy = OrderedDict()
         if len(lag) < len(order):
             has_expired = True
         for i, thing in enumerate(order):
