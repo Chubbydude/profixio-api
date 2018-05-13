@@ -1,0 +1,92 @@
+[
+  {
+    "team": "Lag",
+    "rank": 0,
+    "gamesPlayed": "Spelade",
+    "wins": "Vinster",
+    "draws": "Oavgjorda",
+    "losses": "F\u00f6rluster",
+    "goals": "M\u00e5l",
+    "points": "Po\u00e4ng"
+  },
+  {
+    "team": "Academic Work",
+    "rank": 1,
+    "gamesPlayed": "10",
+    "wins": "8",
+    "draws": "0",
+    "losses": "2",
+    "goals": "50-14",
+    "points": "24"
+  },
+  {
+    "team": "FC Valostore ",
+    "rank": 2,
+    "gamesPlayed": "10",
+    "wins": "7",
+    "draws": "0",
+    "losses": "3",
+    "goals": "30-16",
+    "points": "21"
+  },
+  {
+    "team": "FC Oriflame",
+    "rank": 3,
+    "gamesPlayed": "10",
+    "wins": "5",
+    "draws": "1",
+    "losses": "4",
+    "goals": "15-20",
+    "points": "16"
+  },
+  {
+    "team": "FC Trompe",
+    "rank": 4,
+    "gamesPlayed": "10",
+    "wins": "4",
+    "draws": "2",
+    "losses": "4",
+    "goals": "23-17",
+    "points": "14"
+  },
+  {
+    "team": "Kungliga Hattrick",
+    "rank": 5,
+    "gamesPlayed": "10",
+    "wins": "2",
+    "draws": "1",
+    "losses": "7",
+    "goals": "14-31",
+    "points": "7"
+  },
+  {
+    "team": "Hoyzer Boyz ",
+    "rank": 6,
+    "gamesPlayed": "10",
+    "wins": "1",
+    "draws": "2",
+    "losses": "7",
+    "goals": "5-39",
+    "points": "5"
+  },
+  {
+    "team": "CAREEREYE",
+    "rank": 7,
+    "gamesPlayed": "Utg\u00e5tt",
+    "wins": "-",
+    "draws": "-",
+    "losses": "-",
+    "goals": "-",
+    "points": "-"
+  },
+  {
+    "team": "FC Gordos",
+    "rank": 8,
+    "gamesPlayed": "Utg\u00e5tt",
+    "wins": "-",
+    "draws": "-",
+    "losses": "-",
+    "goals": "-",
+    "points": "-"
+  }
+]

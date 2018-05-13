@@ -1,0 +1,74 @@
+#%RAML 1.0
+title: Korpen-Profixio
+description: |-
+  Från Profixios hemsida, kopiera parametern från den division du önskar få tabellen ifrån.
+  https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1   ==> **Korpen_SERIE_AVD8015&k=LS8015&p=1**
+version: '0.1'
+mediaType: application/json
+protocols:
+  - HTTP
+baseUri: https://mocksvc.mulesoft.com/mocks/0bb0bbc9-abb9-4d83-ae9b-793009bf8316/api/profixio # baseUri: https://mocksvc.mulesoft.com/mocks/5a945251-7237-4408-92d3-8f89d21fd852/api/profixio # baseUri: 'https://mocksvc.mulesoft.com/mocks/a5157746-cd41-4a2d-8f78-7f81ccdff5ba/api/profixio'
+'/girlzmock/standings':
+ get:
+  responses:
+    '200':
+      body:
+        application/json:
+          description: girlz hardcoded standings for mocking
+          example: !include examples\boyz_Stockholm-Korpen_2017_standings.json
+
+'/boyzmock/standings':
+ get:
+  responses:
+    '200':
+      body:
+        application/json:
+          description: girlz hardcoded standings for mocking
+          example: !include examples\girlz_Stockholm-Korpen_2017_standings.json
+'/{division}':
+  get:
+    responses:
+      '200':
+        body:
+          application/json:
+            description: Division
+            example: !include examples\TablePress_Korpen_SERIE_AVD8015kLS8015p1.json
+
+            type: array
+      '400':
+        description: |-
+          Division not found.
+          Profixio exampel URL: https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1
+          Copy and add disivion Korpen_SERIE_AVD8015&k=LS8015&p=1 as resource
+
+'/{division}/standings':
+  get:
+    responses:
+      '200':
+        body:
+          application/json:
+            description: Division
+            example: !include examples\TablePress_Korpen_SERIE_AVD8015kLS8015p1.json
+
+            type: array
+      '400':
+        description: |-
+          Division not found.
+          Profixio exampel URL: https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1
+          Copy and add disivion Korpen_SERIE_AVD8015&k=LS8015&p=1 as resource
+
+'/{division}/fixtures':
+  get:
+    responses:
+      '200':
+        body:
+          application/json:
+            description: Division
+            example: !include examples\TablePress_Korpen_SERIE_AVD8015kLS8015p1.json
+
+            type: array
+      '400':
+        description: |-
+          Division not found.
+          Profixio exampel URL: https://www.profixio.com/fx/serieoppsett.php?t=Korpen_SERIE_AVD8015&k=LS8015&p=1
+          Copy and add disivion Korpen_SERIE_AVD8015&k=LS8015&p=1 as resource

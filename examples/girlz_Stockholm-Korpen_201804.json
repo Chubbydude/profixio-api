@@ -1,0 +1,92 @@
+[
+  {
+    "team": "Lag", 
+    "rank": 0, 
+    "gamesPlayed": "Spelade", 
+    "wins": "Vinster", 
+    "draws": "Oavgjorda", 
+    "losses": "F\u00f6rluster", 
+    "goals": "M\u00e5l", 
+    "points": "Po\u00e4ng"
+  }, 
+  {
+    "team": "Hoyzer Girlz", 
+    "rank": 1, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "Islanders", 
+    "rank": 2, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "LesBeSocial", 
+    "rank": 3, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "SweLatinas", 
+    "rank": 4, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "S\u00f6rskogen Finest", 
+    "rank": 5, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "TGC", 
+    "rank": 6, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "TT United", 
+    "rank": 7, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }, 
+  {
+    "team": "Vega FC", 
+    "rank": 8, 
+    "gamesPlayed": "0", 
+    "wins": "0", 
+    "draws": "0", 
+    "losses": "0", 
+    "goals": "0-0", 
+    "points": "0"
+  }
+]
